@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bo Lip — Keep It Under Wraps</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF4D00;
+    --orange-dark: #CC3D00;
+    --black: #111111;
+    --offwhite: #F5F0E8;
+    --muted: #888;
+    --peach: #FFDAB9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--black);
+    color: white;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(17,17,17,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .nav-lip {
+    width: 44px;
+    height: 11px;
+    background: var(--orange);
+    border-radius: 20px 20px 0 0;
+    opacity: 0.85;
+  }
+
+  .nav-wordmark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: white;
+    line-height: 1;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: white; }
+
+  .nav-cta {
+    background: var(--orange);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+
+  .nav-cta:hover { background: var(--orange-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--orange);
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28vw;
+    font-weight: 800;
+    color: rgba(0,0,0,0.07);
+    letter-spacing: -4px;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+  }
+
+  .hero-lip {
+    width: 120px;
+    height: 30px;
+    background: white;
+    border-radius: 60px 60px 0 0;
+    opacity: 0.2;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-wordmark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(80px, 18vw, 160px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -4px;
+    line-height: 0.9;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+
+  .hero-slogan {
+    font-size: 13px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-top: 1.5rem;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    max-width: 420px;
+    line-height: 1.7;
+    margin-top: 2rem;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+
+  .btn-primary {
+    background: white;
+    color: var(--orange);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+
+  .btn-outline {
+    background: transparent;
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: border-color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: white; }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 1s ease 0.8s both;
+  }
+
+  .scroll-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+  }
+
+  .scroll-bar {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-bar::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation: scrollDrop 1.5s ease 1s infinite;
+  }
+
+  /* WHAT IS IT */
+  .what {
+    background: var(--black);
+    padding: 8rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .what-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .what-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(40px, 6vw, 68px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+  }
+
+  .what-body {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    max-width: 420px;
+  }
+
+  .tin-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tin-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: var(--orange);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+  }
+
+  .tin-lip {
+    width: 80px;
+    height: 20px;
+    background: white;
+    border-radius: 40px 40px 0 0;
+    opacity: 0.2;
+  }
+
+  .tin-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -2px;
+    line-height: 1;
+  }
+
+  .tin-flavour {
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+  }
+
+  .tin-dots {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .tin-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
+
+  .tin-dot.empty { opacity: 0.25; }
+
+  .tin-ring {
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,77,0,0.3);
+  }
+
+  .tin-ring-2 {
+    position: absolute;
+    inset: -32px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(255,77,0,0.15);
+  }
+
+  /* WHY */
+  .why {
+    background: var(--offwhite);
+    padding: 8rem 3rem;
+    text-align: center;
+  }
+
+  .why-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .why-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -2px;
+    line-height: 0.95;
+    margin-bottom: 4rem;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .why-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    text-align: left;
+  }
+
+  .why-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--orange);
+    opacity: 0.25;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .why-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.5px;
+  }
+
+  .why-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /* FLAVOURS */
+  .flavours {
+    background: var(--black);
+    padding: 8rem 3rem;
+    text-align: center;
+  }
+
+  .flavours-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .flavours-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 0.95;
+    margin-bottom: 3rem;
+  }
+
+  .flavours-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+  }
+
+  .flavour-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 700px;
+    margin: 0 auto 4rem;
+  }
+
+  .flavour-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #1A1A1A;
+    border: 0.5px solid rgba(255,255,255,0.1);
+    padding: 12px 22px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    transition: border-color 0.2s;
+  }
+
+  .flavour-pill:hover { border-color: var(--orange); }
+
+  .flavour-pip {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* NOTIFY */
+  .notify {
+    background: var(--orange);
+    padding: 8rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .notify-bg {
+    position: absolute;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22vw;
+    font-weight: 800;
+    color: rgba(0,0,0,0.06);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .notify-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .notify-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -2px;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .notify-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .notify-form {
+    display: flex;
+    gap: 0;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .notify-input {
+    flex: 1;
+    background: white;
+    border: none;
+    padding: 16px 20px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    color: var(--black);
+    outline: none;
+  }
+
+  .notify-input::placeholder { color: #aaa; }
+
+  .notify-btn {
+    background: var(--black);
+    color: white;
+    border: none;
+    padding: 16px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .notify-btn:hover { opacity: 0.85; }
+
+  .notify-privacy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 1rem;
+    position: relative;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0A0A0A;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 0.5px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .footer-lip {
+    width: 36px;
+    height: 9px;
+    background: var(--orange);
+    border-radius: 18px 18px 0 0;
+    opacity: 0.7;
+  }
+
+  .footer-wordmark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-slogan {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+  }
+
+  .footer-right {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    text-align: right;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollDrop {
+    0% { top: -100%; }
+    100% { top: 100%; }
+  }
+
+  /* SUCCESS STATE */
+  .success-msg {
+    display: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    position: relative;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .what { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
+    .tin-circle { width: 220px; height: 220px; }
+    .why { padding: 5rem 1.5rem; }
+    .flavours { padding: 5rem 1.5rem; }
+    .notify { padding: 5rem 1.5rem; }
+    .notify-form { flex-direction: column; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    .footer-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-lip"></div>
+    <div class="nav-wordmark">BO LIP</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#what">What is it</a></li>
+    <li><a href="#why">Why Bo Lip</a></li>
+    <li><a href="#flavours">Flavours</a></li>
+  </ul>
+  <a href="#notify" class="nav-cta">Get notified</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">BO LIP</div>
+  <div class="hero-lip"></div>
+  <div class="hero-wordmark">BO LIP</div>
+  <div class="hero-slogan">Keep it under wraps</div>
+  <p class="hero-sub">South Africa's first truly local nicotine pouch. No smoke. No spit. Just slip it under the bo lip and carry on.</p>
+  <div class="hero-actions">
+    <a href="#notify" class="btn-primary">Get early access</a>
+    <a href="#what" class="btn-outline">Learn more</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-label">Scroll</div>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- WHAT IS IT -->
+<section class="what" id="what">
+  <div>
+    <div class="what-label">What is Bo Lip?</div>
+    <h2 class="what-heading">Nicotine.<br/>No smoke.<br/>No fuss.</h2>
+    <p class="what-body">A nicotine pouch is a small, smoke-free, spit-free pouch you place under your upper lip. You get the hit, without the harm of tobacco smoke — and without anyone even noticing. Bo Lip is the proudly South African version of a global movement.</p>
+  </div>
+  <div class="tin-visual">
+    <div class="tin-circle">
+      <div class="tin-ring"></div>
+      <div class="tin-ring-2"></div>
+      <div class="tin-lip"></div>
+      <div class="tin-brand">BO LIP</div>
+      <div class="tin-flavour">Peach</div>
+      <div class="tin-dots">
+        <div class="tin-dot"></div>
+        <div class="tin-dot"></div>
+        <div class="tin-dot"></div>
+        <div class="tin-dot"></div>
+        <div class="tin-dot empty"></div>
+        <div class="tin-dot empty"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="why-label">Why Bo Lip</div>
+  <h2 class="why-heading">Built different.<br/>Worn local.</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-number">01</div>
+      <div class="why-title">No smoke</div>
+      <div class="why-desc">Zero combustion. Zero secondhand smoke. Use it anywhere — the braai, the office, the taxi. Nobody has to know.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-number">02</div>
+      <div class="why-title">No spit</div>
+      <div class="why-desc">Clean and discreet. Unlike older tobacco alternatives, Bo Lip pouches are completely spit-free. Just pop and go.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-number">03</div>
+      <div class="why-title">Proudly SA</div>
+      <div class="why-desc">Made for South Africans, not imported from Scandinavia. Local flavours, local attitude, local price point.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-number">04</div>
+      <div class="why-title">Your strength</div>
+      <div class="why-desc">Choose your hit from light to strong. Six strength levels so you can ease in or go straight to the deep end.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FLAVOURS -->
+<section class="flavours" id="flavours">
+  <div class="flavours-label">Flavour range</div>
+  <h2 class="flavours-heading">Something for<br/>every bo lip.</h2>
+  <p class="flavours-note">Coming soon — register below to vote for your favourite</p>
+  <div class="flavour-row">
+    <div class="flavour-pill"><div class="flavour-pip" style="background:#4DAFFF;"></div>Arctic Mint</div>
+    <div class="flavour-pill"><div class="flavour-pip" style="background:#FFDAB9;"></div>Peach</div>
+    <div class="flavour-pill"><div class="flavour-pip" style="background:#FFD580;"></div>Rooibos Rush</div>
+    <div class="flavour-pill"><div class="flavour-pip" style="background:#8BC34A;"></div>Buchu Fresh</div>
+    <div class="flavour-pill"><div class="flavour-pip" style="background:#FFE566;"></div>Lemon Drop</div>
+    <div class="flavour-pill"><div class="flavour-pip" style="background:#D4A0FF;"></div>Berry Burst</div>
+  </div>
+  <a href="#notify" class="btn-outline">Vote for your flavour</a>
+</section>
+
+<!-- NOTIFY -->
+<section class="notify" id="notify">
+  <div class="notify-bg">BO LIP</div>
+  <div class="notify-label">Be first</div>
+  <h2 class="notify-heading">Get in before<br/>everyone else.</h2>
+  <p class="notify-sub">Register your interest and we'll hit you first when Bo Lip drops.</p>
+  <div style="max-width:480px;margin:0 auto;position:relative;">
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+    <style>
+      #mc_embed_signup { background: transparent !important; width: 100% !important; }
+      #mc_embed_signup .mc-field-group { padding-bottom: 0 !important; }
+      #mc_embed_signup .mc-field-group label { display: none; }
+      #mc_embed_signup input.email {
+        background: white !important;
+        border: none !important;
+        padding: 16px 20px !important;
+        font-family: 'Barlow', sans-serif !important;
+        font-size: 15px !important;
+        color: #111 !important;
+        width: 100% !important;
+        height: auto !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+      }
+      #mc_embed_signup input.email::placeholder { color: #aaa; }
+      #mc_embed_signup .clear { margin: 0 !important; }
+      #mc_embed_signup .button {
+        background: #111111 !important;
+        color: white !important;
+        font-family: 'Barlow Condensed', sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        padding: 16px 28px !important;
+        border: none !important;
+        border-radius: 0 !important;
+        height: auto !important;
+        line-height: 1 !important;
+        width: auto !important;
+        margin: 0 !important;
+        cursor: pointer !important;
+        transition: opacity 0.2s !important;
+      }
+      #mc_embed_signup .button:hover { opacity: 0.85 !important; }
+      #mc_embed_signup form { padding: 0 !important; }
+      #mc_embed_signup h2 { display: none; }
+      #mc_embed_signup .indicates-required { display: none; }
+      #mc_embed_signup .foot { display: flex !important; flex-direction: row !important; align-items: stretch !important; gap: 0 !important; }
+      #mc_embed_signup .optionalParent { display: none; }
+      #mc_embed_signup #mce-responses { width: 100%; }
+      #mc_embed_signup #mce-success-response { color: white !important; font-family: 'Barlow Condensed', sans-serif !important; font-size: 20px !important; font-weight: 700 !important; padding: 1rem 0 !important; }
+      #mc_embed_signup #mce-error-response { color: white !important; font-family: 'Barlow', sans-serif !important; font-size: 14px !important; padding: 0.5rem 0 !important; }
+    </style>
+    <div id="mc_embed_signup">
+      <form action="https://bolip.us22.list-manage.com/subscribe/post?u=37cb31b8c2837d53c7ee33f0d&amp;id=d662df61f9&amp;f_id=008fc2e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll">
+          <div class="mc-field-group">
+            <label for="mce-EMAIL">Email Address</label>
+            <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required placeholder="Your email address" value="">
+          </div>
+          <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display:none;"></div>
+            <div class="response" id="mce-success-response" style="display:none;"></div>
+          </div>
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input type="text" name="b_37cb31b8c2837d53c7ee33f0d_d662df61f9" tabindex="-1" value="">
+          </div>
+          <div class="clear foot">
+            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Notify me">
+          </div>
+        </div>
+      </form>
+    </div>
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+    <script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+  </div>
+  <p class="notify-privacy">No spam. Just Bo Lip news. Unsubscribe any time.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-lip"></div>
+    <div class="footer-wordmark">BO LIP</div>
+    <div class="footer-slogan">Keep it under wraps</div>
+  </div>
+  <div class="footer-right">
+    <div>© 2026 Bo Lip. All rights reserved.</div>
+    <div style="margin-top:4px;">South Africa · Nicotine pouches are for adults only.</div>
+  </div>
+</footer>
+
+<script>
+
+</script>
+
+</body>
+</html>
